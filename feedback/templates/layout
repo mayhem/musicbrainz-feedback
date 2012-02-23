@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }}</title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.tmpl.min.js') }}"></script>
+</head>
+<body>
+  <div class="body">
+      {% block body %}{% endblock %}
+  </div>
+</body>
+</html>

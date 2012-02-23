@@ -1,0 +1,17 @@
+Issue:
+    id 
+    owner
+    description
+    tickets (free form txt field, with comma separated issues IDs)
+
+User:
+    id -- pegged to editor.id in the main DB
+    name -- imported from editor.name in the main DB
+
+For use when ranking of future tasks is implemented
+
+Rank:
+    id
+    user
+    task
+    sequence

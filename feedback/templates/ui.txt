@@ -1,0 +1,19 @@
+index
+- login or
+- task list and N slots, save, cancel, edit tasks
+- drag and drop tasks from task list to slots
+
+tasks
+- list all tasks with X to remove tasks
+- add new button
+
+tasks/new
+- create a new task
+- upon saving, redirects to tasks
+
+tasks/edit
+- edit task
+- upon saving, redirects to tasks
+
+task/remove
+- confirm removing a task, show X number of people having rated it
