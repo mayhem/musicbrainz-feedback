@@ -1,5 +1,6 @@
 from flask import Flask
 from flaskext.sqlalchemy import SQLAlchemy
+from flaskext.login import LoginManager
 
 # configuration
 DEBUG = True
@@ -10,5 +11,8 @@ PASSWORD = 'default'
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../feedback.db'
 db = SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.setup_app(app)
 
 app.config.from_object(__name__)

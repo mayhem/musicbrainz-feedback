@@ -1,1 +1,1 @@
-from view import index, login
+from view import index, login, give_feedback, rank

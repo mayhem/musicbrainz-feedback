@@ -2,17 +2,23 @@
 from flaskext.sqlalchemy import SQLAlchemy
 from feedback.feedback import db
 
-class Issue(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
-    tickets = db.Column(db.Text)
+    username = db.Column(db.Text)
 
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    user = db.relationship('User', backref=db.backref('issue', lazy='dynamic'))
+    def __init__(self, id, username):
+        self.id = id
+        self.username = username
 
-    def __init__(self, description, tickets):
-        self.description = description
-        self.tickets = tickets
+    def is_active(self):
+        return True
+
+    # TODO: make this actually check credentials at musicbrainz.org
+    def is_authenticated(self):
+        return True
+
+    def get_id(self):
+        return self.username
 
     def __repr__(self):
-        return '<Issue %d>' % self.id
+        return '<User %d>' % self.id

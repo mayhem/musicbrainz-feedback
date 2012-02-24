@@ -1,14 +1,22 @@
 # -*- coding: utf-8 -*-
 from flaskext.sqlalchemy import SQLAlchemy
 from feedback.feedback import db
+from feedback.model import user
 
-class User(db.Model):
+class Issue(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Text)
+    description = db.Column(db.Text)
+    tickets = db.Column(db.Text)
 
-    def __init__(self, id, name):
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('Issue', lazy='dynamic'))
+
+    def __init__(self, id, user, description, tickets):
         self.id = id
-        self.name = name
+        self.user = user
+        self.description = description
+        self.tickets = tickets
 
     def __repr__(self):
-        return '<User %d>' % self.id
+        return '<Issue %d>' % self.id
+
