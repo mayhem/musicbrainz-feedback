@@ -1,12 +1,16 @@
 {% extends 'layout' %}
 {% block body %}
-<div class="hero-unit">
-<h1>Poot!</h1>
-<p>Logged in user:
-{% if current_user.get_id() %}
-    {{ current_user.get_id() }}. user object exists.</p>
+
+<table>
+{% for issue in issues %}
+    <tr>
+       <td>{{ issue.id }}</td>
+       <td>{{ issue.description }}</td>
+       <td>{{ issue.tickets }} </td>
+       <td>{{ issue.created }} </td>
+    </tr>
 {% else %}
-    <p>user not logged in.</p>
-{% endif %}
-<div>
+    <p>There are no issues to be decided. <a href="issue/create">Create a new issue</a>?</p>
+{% endfor %}
+</table>
 {% endblock %}
