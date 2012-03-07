@@ -10,12 +10,15 @@ class User(db.Model):
         self.id = id
         self.username = username
 
-    def is_active(self):
-        return True
-
     # TODO: make this actually check credentials at musicbrainz.org
     def is_authenticated(self):
         return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
 
     def get_id(self):
         return self.username

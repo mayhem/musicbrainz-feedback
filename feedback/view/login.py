@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
-from flaskext.login import login_user, logout_user, login_required
+from flask import g, Flask, render_template, request, flash, redirect, url_for
+from flaskext.login import login_user, logout_user, login_required, current_user
 from feedback.feedback import app
 from feedback.model.user import User
 from feedback.form.login import LoginForm
@@ -20,7 +20,6 @@ def login():
     return render_template("login", form=form, title="Feedback: Login")
 
 @app.route("/logout")
-@login_required
 def logout():
     logout_user()
     return redirect("/")

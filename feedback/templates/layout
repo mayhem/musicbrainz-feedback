@@ -26,10 +26,10 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li {% if request.path == "/" %}class="active"{% endif %}><a href="/">Home</a></li>
-                    {% if flaskext.login.current_user %}
-                        <li {% if request.path == "/login" %}class="active"{% endif %}><a href="/login">Login</a></li>
+                    {% if current_user.get_id() %}
+                        <li {% if request.path == "/logout" %}class="active"{% endif %}><a href="/logout">Logout</a></li>
                     {% else %}
-                        <li {% if request.path == "/loout" %}class="active"{% endif %}><a href="/logout">Logout</a></li>
+                        <li {% if request.path == "/login" %}class="active"{% endif %}><a href="/login">Login</a></li>
                     {% endif %}
                     <li {% if request.path == "/feedback" %}class="active"{% endif %}><a href="/feedback">Feedback</a></li>
                     <li {% if request.path == "/rank" %}class="active"{% endif %}><a href="/rank">Rank tasks</a></li>
