@@ -7,9 +7,11 @@
       <div class="span8" style="background: #eee">
             <form method="post" action="/issue/create">
               <dl>
+                {{ render_field(form.title) }}
                 {{ render_field(form.description) }}
                 {{ render_field(form.tickets) }}
               </dl>
+              {{ form.id() }}
               <p><input type=submit value=Create>
             </form>
       </div>

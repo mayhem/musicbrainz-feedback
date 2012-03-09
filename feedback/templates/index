@@ -5,12 +5,13 @@
 {% for issue in issues %}
     <tr>
        <td>{{ issue.id }}</td>
-       <td>{{ issue.description }}</td>
+       <td>{{ issue.title }}</td>
        <td>{{ issue.tickets }} </td>
        <td>{{ issue.created }} </td>
     </tr>
 {% else %}
-    <p>There are no issues to be decided. <a href="issue/create">Create a new issue</a>?</p>
+    <p>There are no issues to be decided.</p>
 {% endfor %}
 </table>
+<p><a href="issue/create">Create a new issue</a></p>
 {% endblock %}
