@@ -1,17 +1,29 @@
 {% extends 'layout' %}
 {% block body %}
 
-<table>
-{% for issue in issues %}
-    <tr>
-       <td>{{ issue.id }}</td>
-       <td>{{ issue.title }}</td>
-       <td>{{ issue.tickets }} </td>
-       <td>{{ issue.created }} </td>
-    </tr>
-{% else %}
-    <p>There are no issues to be decided.</p>
-{% endfor %}
-</table>
-<p><a href="issue/create">Create a new issue</a></p>
+<div class="container-fluid">
+  <div class="row-fluid">
+  <div class="span2">&nbsp;</div>
+  <div class="span8">
+    <p><a href="issue/create">Create a new issue</a></p>
+    <table class="issues_table table">
+    <thead>
+        <th>id</th>
+        <th>title</th>
+        <th>expires</th>
+    </thead>
+    {% for issue in issues %}
+        <tr>
+           <td>{{ issue.id }}</td>
+           <td><a href="/issue/{{ issue.id }}">{{ issue.title }}</a></td>
+           <td>{{ issue.expires() }} </td>
+        </tr>
+    {% else %}
+        <p>There are no issues to be decided.</p>
+    {% endfor %}
+    </table>
+  </div>
+  <div class="span2">&nbsp;</div>
+  </div>
+</div>
 {% endblock %}

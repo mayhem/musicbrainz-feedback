@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 from flaskext.sqlalchemy import SQLAlchemy
 from feedback.feedback import db
+from feedback.misc.utc import UTC
 from feedback.model import user
 
 class Issue(db.Model):
@@ -17,7 +18,11 @@ class Issue(db.Model):
 
     def __init__(self):
         self.is_open = True
-        self.created = datetime.now()
+        self.created = datetime.utcnow()
+
+    def expires(self):
+        expires = self.created + timedelta(14)
+        return expires.strftime("%Y-%m-%d %H:%M utc")
 
     def __repr__(self):
         return '<Issue %d>' % self.id

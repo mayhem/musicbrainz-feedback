@@ -1,0 +1,10 @@
+body{
+    font-size: 12pt;
+}
+body a{
+    font-size: 12pt;
+}
+.issues_table {
+    width: 100%;
+    margin-top: 20px;
+}
