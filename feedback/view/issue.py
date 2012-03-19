@@ -36,11 +36,15 @@ def edit_issue(id):
 
     if id:
         issue = Issue.query.filter_by(id=int(id)).first()
+        if not issue:
+            flash("there is no issue %d" % id)
+            return redirect(url_for('index'))
         form.id.data = issue.id
         form.description.data = issue.description
         form.tickets.data = issue.tickets
         form.user_id.data = issue.user_id
         form.title.data = issue.title
+        form.expires.data = issue.expires()
         return render_template("issue/main", form=form, title="Feedback: Edit issue", action="edit")
 
     return render_template("issue/main", form=form, title="Feedback: Create issue", action="edit")
@@ -48,11 +52,17 @@ def edit_issue(id):
 @app.route('/issue/<int:id>')
 def view_issue(id):
     issue = Issue.query.filter_by(id=int(id)).first()
+    if not issue:
+        flash("there is no issue %d" % id)
+        return redirect(url_for('index'))
     return render_template("issue/main", issue=issue, title="Feedback: issue %s" % issue.title, action="view")
 
 @app.route('/issue/<int:id>/delete', methods=['GET', 'POST'])
 def delete_issue(id):
     issue = Issue.query.filter_by(id=id).first()
+    if not issue:
+        flash("there is no issue %d" % id)
+        return redirect(url_for('index'))
     if request.method == 'POST':
         db.session.delete(issue)
         db.session.commit()

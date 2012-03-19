@@ -21,3 +21,13 @@ body a{
     background-color: #fdd;
     border-radius: 1em;
 }
+.issue_form_item {
+    width: 100%;
+}
+.issue_form_textfield {
+    width: 100%;
+    height: 12em;
+}
+.lefthand_link {
+    text-align: right;
+}

@@ -6,3 +6,4 @@ class CreateIssueForm(Form):
     title = TextField('title', [validators.Length(min=0, max=128)])
     description = TextAreaField('description', [validators.Length(min=0, max=16384)])
     tickets = TextField('related tickets', [validators.Length(min=0, max=1024)])
+    expires = TextField('expires')

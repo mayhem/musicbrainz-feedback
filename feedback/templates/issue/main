@@ -22,7 +22,7 @@
         {% if action=='view' %}
             {{ issue.title }}
         {% else %}
-            {{ render_field(form.title) }}
+            {{ render_field(form.title, class="issue_form_item") }}
         {% endif %}
       </div>
       <div class="span2">&nbsp;</div>
@@ -33,7 +33,7 @@
         {% if action=='view' %}
             {{ issue.description }}
         {% else %}
-            {{ render_field(form.description) }}
+            {{ render_field(form.description, class="issue_form_textfield") }}
         {% endif %}
       </div>
       <div class="span2">&nbsp;</div>
@@ -44,7 +44,18 @@
         {% if action=='view' %}
             {{ issue.tickets }}
         {% else %}
-            {{ render_field(form.tickets) }}
+            {{ render_field(form.tickets, class="issue_form_item") }}
+        {% endif %}
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2 issue_title">expires</div>
+      <div class="span8 issue_text">
+        {% if action=='view' %}
+            {{ issue.expires() }}
+        {% else %}
+            {{ form.expires.data }}
         {% endif %}
       </div>
       <div class="span2">&nbsp;</div>

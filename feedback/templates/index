@@ -5,7 +5,9 @@
   <div class="row-fluid">
   <div class="span2">&nbsp;</div>
   <div class="span8">
-    <p><a href="issue/create">Create a new issue</a></p>
+    <div class="lefthand_link">
+      <a href="issue/create">Create a new issue</a>
+    </div>
     <table class="issues_table table">
     <thead>
         <th>id</th>
