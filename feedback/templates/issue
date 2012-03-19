@@ -1,0 +1,74 @@
+{% extends 'layout' %}
+{% block body %}
+<div class="container">
+    {% if action=='edit' %}
+      <form method="post" action="/issue/create">
+    {% endif %}
+    {% if action=='view' %}
+        <div class="row-fluid">
+          <div class="span2 issue_title">issue</div>
+          <div class="span8 issue_text">
+             {{ issue.id }}, created by 
+             <a href="http://musicbrainz.org/user/{{ issue.user.username | urlize() }}">
+                 {{ issue.user.username }}
+             </a>
+          </div>
+          <div class="span2">&nbsp;</div>
+        </div>
+    {% endif %}
+    <div class="row-fluid">
+      <div class="span2 issue_title">title</div>
+      <div class="span8 issue_text">
+        {% if action=='view' %}
+            {{ issue.title }}
+        {% else %}
+            {{ render_field(form.title) }}
+        {% endif %}
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2 issue_title">description</div>
+      <div class="span8 issue_text">
+        {% if action=='view' %}
+            {{ issue.description }}
+        {% else %}
+            {{ render_field(form.description) }}
+        {% endif %}
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2 issue_title">tickets</div>
+      <div class="span8 issue_text">
+        {% if action=='view' %}
+            {{ issue.tickets }}
+        {% else %}
+            {{ render_field(form.tickets) }}
+        {% endif %}
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+    <div class="row-fluid">
+      <div class="span2 issue_title">&nbsp;</div>
+      <div class="span8 issue_text">
+          {% if action=='view' %}
+              {% if current_user.get_id() == issue.user.username %}
+                <!--button type="button" formaction="/view/{{ issue.id }}/edit">edit</button-->
+                <a href="/issue/{{ issue.id }}/edit">edit</a>
+                <a href="/issue/{{ issue.id }}/delete">delete</a>
+              {% endif %}
+          {% else %}
+              <input type="submit" value="save">
+          {% endif %}
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+    {% if action=='edit' %}
+      {{ form.id() }}
+      {{ form.user_id() }}
+      </form>
+    {% endif %}
+<div>
+{% endblock %}
+{% from "_formhelper" import render_field %}

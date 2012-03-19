@@ -8,3 +8,16 @@ body a{
     width: 100%;
     margin-top: 20px;
 }
+.issue_title {
+    text-align: right;
+    font-weight: bold;
+}
+.issue_text {
+    margin-bottom: 12px;
+}
+.flashes {
+    margin-right: 20%;
+    margin-left: 20%;
+    background-color: #fdd;
+    border-radius: 1em;
+}

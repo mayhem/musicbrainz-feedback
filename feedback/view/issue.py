@@ -7,11 +7,15 @@ from flaskext.login import current_user
 
 @app.route('/issue/create', methods=['GET', 'POST'])
 def create_issue():
+    return edit_issue(0)
+
+@app.route('/issue/<int:id>/edit', methods=['GET', 'POST'])
+def edit_issue(id):
     form = CreateIssueForm(request.form)
     if request.method == 'POST' and form.validate():
-        id = int(request.form.get("id") or '0')
+        id = int(form.id.data)
         if id:
-            issue = Issue.query.filter_by(id=int(id)).first()
+            issue = Issue.query.filter_by(id=id).first()
             issue.title = form.title.data
             issue.description = form.description.data
             issue.tickets = form.tickets.data
@@ -25,11 +29,21 @@ def create_issue():
 
         db.session.commit()
 
-        flash("Issue created.")
-        return redirect(url_for('create_issue'))
-    return render_template("issue/create", form=form, title="Feedback: Create issue")
+        flash("issue saved")
+        return redirect(url_for('index'))
+
+    if id:
+        issue = Issue.query.filter_by(id=int(id)).first()
+        form.id.data = issue.id
+        form.description.data = issue.description
+        form.tickets.data = issue.tickets
+        form.user_id.data = issue.user_id
+        form.title.data = issue.title
+        return render_template("issue", form=form, title="Feedback: Edit issue", action="edit")
+
+    return render_template("issue", form=form, title="Feedback: Create issue", action="edit")
 
 @app.route('/issue/<int:id>')
 def view_issue(id):
     issue = Issue.query.filter_by(id=int(id)).first()
-    return render_template("issue/view", issue=issue, title="Feedback: issue %s" % issue.title)
+    return render_template("issue", issue=issue, title="Feedback: issue %s" % issue.title, action="view")
