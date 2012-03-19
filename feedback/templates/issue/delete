@@ -1,0 +1,16 @@
+{% extends 'layout' %}
+{% block body %}
+<div class="container">
+    <div class="row-fluid">
+      <div class="span2 issue_title">issue</div>
+      <div class="span8 issue_text">
+         <p>Are you sure you want to delete issue {{ issue.id }} "{{ issue.title }}"?</p>
+         <form method="POST" action="/issue/{{ issue.id }}/delete">
+             <a href="/">cancel</a>
+             <button type="submit">yes, delete this issue</button>
+         </form>
+      </div>
+      <div class="span2">&nbsp;</div>
+    </div>
+<div>
+{% endblock %}

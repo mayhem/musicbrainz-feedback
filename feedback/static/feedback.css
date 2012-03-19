@@ -16,8 +16,8 @@ body a{
     margin-bottom: 12px;
 }
 .flashes {
-    margin-right: 20%;
-    margin-left: 20%;
+    margin: 0 20% 0 20%;
+    padding-botton: 5px;
     background-color: #fdd;
     border-radius: 1em;
 }

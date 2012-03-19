@@ -5,6 +5,8 @@ from feedback.form.issue import CreateIssueForm
 from feedback.feedback import db
 from flaskext.login import current_user
 
+# TODO: Catch database errors
+
 @app.route('/issue/create', methods=['GET', 'POST'])
 def create_issue():
     return edit_issue(0)
@@ -39,11 +41,22 @@ def edit_issue(id):
         form.tickets.data = issue.tickets
         form.user_id.data = issue.user_id
         form.title.data = issue.title
-        return render_template("issue", form=form, title="Feedback: Edit issue", action="edit")
+        return render_template("issue/main", form=form, title="Feedback: Edit issue", action="edit")
 
-    return render_template("issue", form=form, title="Feedback: Create issue", action="edit")
+    return render_template("issue/main", form=form, title="Feedback: Create issue", action="edit")
 
 @app.route('/issue/<int:id>')
 def view_issue(id):
     issue = Issue.query.filter_by(id=int(id)).first()
-    return render_template("issue", issue=issue, title="Feedback: issue %s" % issue.title, action="view")
+    return render_template("issue/main", issue=issue, title="Feedback: issue %s" % issue.title, action="view")
+
+@app.route('/issue/<int:id>/delete', methods=['GET', 'POST'])
+def delete_issue(id):
+    issue = Issue.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        db.session.delete(issue)
+        db.session.commit()
+        flash("issue %d deleted" % id)
+        return redirect(url_for('index'))
+
+    return render_template("issue/delete", title="Feedback: Delete issue", issue=issue)
