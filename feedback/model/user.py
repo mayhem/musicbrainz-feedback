@@ -6,22 +6,20 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.Text)
 
-    def __init__(self, id, username):
-        self.id = id
+    def __init__(self, username):
         self.username = username
 
-    # TODO: make this actually check credentials at musicbrainz.org
     def is_authenticated(self):
-        return True
+        return self.username != ""
 
     def is_active(self):
         return True
 
     def is_anonymous(self):
-        return False
+        return self.username == ""
 
     def get_id(self):
         return self.username
 
     def __repr__(self):
-        return '<User %d>' % self.id
+        return '<User %d>' % self.username

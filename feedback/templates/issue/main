@@ -1,7 +1,7 @@
 {% extends 'layout' %}
 {% block body %}
 <div class="container">
-    {% if action=='edit' %}
+    {% if action!='view' %}
       <form method="post" action="/issue/create">
     {% endif %}
     {% if action=='view' %}
@@ -49,28 +49,48 @@
       </div>
       <div class="span2">&nbsp;</div>
     </div>
-    <div class="row-fluid">
-      <div class="span2 issue_title">expires</div>
-      <div class="span8 issue_text">
-        {% if action=='view' %}
-            {{ issue.expires() }}
-        {% else %}
-            {{ form.expires.data }}
-        {% endif %}
-      </div>
-      <div class="span2">&nbsp;</div>
-    </div>
+    {% if action!='create' %}
+        <div class="row-fluid">
+          <div class="span2 issue_title">expires</div>
+          <div class="span8 issue_text">
+            {% if action=='view' %}
+                {{ issue.expires() }}
+            {% else %}
+                {{ form.expires.data }}
+            {% endif %}
+          </div>
+          <div class="span2">&nbsp;</div>
+        </div>
+    {% endif %}
     <div class="row-fluid">
       <div class="span2 issue_title">&nbsp;</div>
       <div class="span8 issue_text">
           {% if action=='view' %}
               {% if current_user.get_id() == issue.user.username %}
-                <!--button type="button" formaction="/view/{{ issue.id }}/edit">edit</button-->
-                <a href="/issue/{{ issue.id }}/edit">edit</a>
-                <a href="/issue/{{ issue.id }}/delete">delete</a>
+                <span class="form_inline">
+                <form method="GET" action="/issue/{{ issue.id }}/edit">
+                  <input type="submit" value="edit">
+                </form>
+                </span>
+                <span class="form_inline">
+                <form method="GET" action="/issue/{{ issue.id }}/delete">
+                  <input type="submit" value="delete">
+                </form>
+                </span>
               {% endif %}
           {% else %}
-              <input type="submit" value="save">
+              <span class="form_inline">
+              {% if action=='create' %}
+                 <form method="GET" action="/">
+              {% else %}
+                 <form method="GET" action="/issue/{{ form.id.data }}">
+              {% endif %}
+                 <input type="submit" value="cancel">
+              </form>
+              </span>
+              <span class="form_inline">
+                <input type="submit" value="save">
+              </span>
           {% endif %}
       </div>
       <div class="span2">&nbsp;</div>

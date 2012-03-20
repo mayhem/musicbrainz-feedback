@@ -8,22 +8,24 @@
     <div class="lefthand_link">
       <a href="issue/create">Create a new issue</a>
     </div>
-    <table class="issues_table table">
-    <thead>
-        <th>id</th>
-        <th>title</th>
-        <th>expires</th>
-    </thead>
-    {% for issue in issues %}
-        <tr>
-           <td>{{ issue.id }}</td>
-           <td><a href="/issue/{{ issue.id }}">{{ issue.title }}</a></td>
-           <td>{{ issue.expires() }} </td>
-        </tr>
+    {% if issues.count() %}
+        <table class="issues_table table">
+        <thead>
+            <th>id</th>
+            <th>title</th>
+            <th>expires</th>
+        </thead>
+        {% for issue in issues %}
+            <tr>
+               <td>{{ issue.id }}</td>
+               <td><a href="/issue/{{ issue.id }}">{{ issue.title }}</a></td>
+               <td>{{ issue.expires() }} </td>
+            </tr>
+        </table>
+        {% endfor %}
     {% else %}
-        <p>There are no issues to be decided.</p>
-    {% endfor %}
-    </table>
+        There are no issues to be decided.
+    {% endif %}
   </div>
   <div class="span2">&nbsp;</div>
   </div>

@@ -3,4 +3,4 @@ from feedback.feedback import app
 
 @app.route('/feedback')
 def feedback():
-    return render_template("feedback", title="Feedback: Give feedback")
+    return render_template("feedback", title="give feedback")

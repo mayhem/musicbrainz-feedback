@@ -2,18 +2,16 @@
 {% block body %}
 <div class="container">
     <div class="row-fluid">
-      <div class="span4">&nbsp;</div>
-      <div class="span4" style="background: #eee">
+      <div class="span3">&nbsp;</div>
+      <div class="span6 loginbox">
+            Log in with your musicbrainz.org credentials:
             <form method="post" action="/login">
-              <dl>
-                {{ render_field(form.username) }}
-                {{ render_field(form.password) }}
-              </dl>
+              <p>{{ form.username }}</p>
+              <p>{{ form.password }}</p>
               <p><input type=submit value=Login>
             </form>
       </div>
-      <div class="span4 offset4">&nbsp;</div>
+      <div class="span3">&nbsp;</div>
     </div>
 <div>
 {% endblock %}
-{% from "_formhelper" import render_field %}

@@ -31,3 +31,14 @@ body a{
 .lefthand_link {
     text-align: right;
 }
+.loginbox {
+    line-height: 3em;
+    background-color: #eee;
+    border-radius: 1em;
+    margin: 2em;
+    padding: 1em;
+}
+.form_inline {
+    display: table-cell;
+    padding-right: 20px;
+}
