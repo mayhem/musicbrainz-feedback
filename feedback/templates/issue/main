@@ -65,6 +65,7 @@
     <div class="row-fluid">
       <div class="span2 issue_title">&nbsp;</div>
       <div class="span8 issue_text">
+          <button type="submit" formaction="/">fuss</button>
           {% if action=='view' %}
               {% if current_user.get_id() == issue.user.username %}
                 <span class="form_inline">

@@ -21,8 +21,8 @@
                <td><a href="/issue/{{ issue.id }}">{{ issue.title }}</a></td>
                <td>{{ issue.expires() }} </td>
             </tr>
-        </table>
         {% endfor %}
+        </table>
     {% else %}
         There are no issues to be decided.
     {% endif %}

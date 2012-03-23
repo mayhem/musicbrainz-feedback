@@ -17,11 +17,13 @@ def create_issue():
 def edit_issue(id):
     form = CreateIssueForm(request.form)
     if request.method == 'POST' and form.validate():
+        print "id: '%s'" % form.id.data
         if form.id.data:
             issue = Issue.query.filter_by(id=int(form.id.data)).first()
             issue.title = form.title.data
             issue.description = form.description.data
             issue.tickets = form.tickets.data
+            flash("issue saved")
         else:
             issue = Issue()
             issue.description = form.description.data
@@ -29,10 +31,10 @@ def edit_issue(id):
             issue.user_id = current_user.id
             issue.title = form.title.data
             db.session.add(issue)
+            flash("issue created")
 
         db.session.commit()
 
-        flash("issue saved")
         return redirect(url_for('index'))
 
     if id:
