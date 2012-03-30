@@ -32,8 +32,6 @@
                     {% else %}
                         <li {% if request.path == "/login" %}class="active"{% endif %}><a href="/login">Login</a></li>
                     {% endif %}
-                    <li {% if request.path == "/feedback" %}class="active"{% endif %}><a href="/feedback">Feedback</a></li>
-                    <li {% if request.path == "/rank" %}class="active"{% endif %}><a href="/rank">Rank tasks</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

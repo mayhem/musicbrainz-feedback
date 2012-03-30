@@ -6,8 +6,8 @@
       <div class="span8 issue_text">
          <p>Are you sure you want to delete issue {{ issue.id }} "{{ issue.title }}"?</p>
          <form method="POST" action="/issue/{{ issue.id }}/delete">
-             <a href="/">cancel</a>
-             <button type="submit">yes, delete this issue</button>
+             <a class="btn" href="/">cancel</a>
+             <input class="btn" type="submit" value="yes, delete this issue"></input>
          </form>
       </div>
       <div class="span2">&nbsp;</div>

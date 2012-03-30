@@ -18,6 +18,7 @@ def edit_issue(id):
     form = CreateIssueForm(request.form)
     if request.method == 'POST' and form.validate():
         print "id: '%s'" % form.id.data
+        print form
         if form.id.data:
             issue = Issue.query.filter_by(id=int(form.id.data)).first()
             issue.title = form.title.data

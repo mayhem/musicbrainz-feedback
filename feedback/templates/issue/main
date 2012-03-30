@@ -1,8 +1,10 @@
 {% extends 'layout' %}
 {% block body %}
 <div class="container">
-    {% if action!='view' %}
-      <form method="post" action="/issue/create">
+    {% if action=='edit' %}
+      <form method="POST" action="/issue/{{ form.id.data }}/edit">
+    {% elif action=='create' %}
+      <form method="POST" action="/issue/create">
     {% endif %}
     {% if action=='view' %}
         <div class="row-fluid">
@@ -65,19 +67,10 @@
     <div class="row-fluid">
       <div class="span2 issue_title">&nbsp;</div>
       <div class="span8 issue_text">
-          <button type="submit" formaction="/">fuss</button>
           {% if action=='view' %}
               {% if current_user.get_id() == issue.user.username %}
-                <span class="form_inline">
-                <form method="GET" action="/issue/{{ issue.id }}/edit">
-                  <input type="submit" value="edit">
-                </form>
-                </span>
-                <span class="form_inline">
-                <form method="GET" action="/issue/{{ issue.id }}/delete">
-                  <input type="submit" value="delete">
-                </form>
-                </span>
+                  <a class="btn" href="/issue/{{ issue.id }}/edit">edit</a>
+                  <a class="btn" href="/issue/{{ issue.id }}/delete">delete</a>
               {% endif %}
           {% else %}
               <span class="form_inline">
@@ -86,17 +79,16 @@
               {% else %}
                  <form method="GET" action="/issue/{{ form.id.data }}">
               {% endif %}
-                 <input type="submit" value="cancel">
-              </form>
+                 <a class="btn" href="/">cancel</a>
               </span>
               <span class="form_inline">
-                <input type="submit" value="save">
+                <input class="btn" type="submit" value="save">
               </span>
           {% endif %}
       </div>
       <div class="span2">&nbsp;</div>
     </div>
-    {% if action=='edit' %}
+    {% if action!='view' %}
       {{ form.id() }}
       {{ form.user_id() }}
       </form>
